@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Playground - Let's AJAX!</title>
+    <title>Playground - Let's Stimulus!</title>
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
@@ -13,17 +13,49 @@
     <div class="container text-center mt-5">
       <h1> Let's Stimulus! ⚡️</h1>
 
-      <form id="search-movies" class="form-inline d-flex justify-content-center m-5">
-        <input id="keyword" type="text" class="form-control" placeholder="Find movies">
-        <input id="submit" type="submit" class="btn btn-primary form-control" value="Search">
-      </form>
+      <div data-controller="disable-button">
+        <button 
+          class="btn btn-primary btn-lg my-3" 
+          data-action="click->disable-button#disable"
+          data-disable-button-target="clickme"
+        >
+          Click me!
+        </button>
+        <button 
+          class="btn btn-outline-primary d-none"
+          data-disable-button-target="reset"
+          data-action="click->disable-button#enable"
+        >
+          Reset
+        </button>
+      </div>
 
-      <ul class="list-inline mt-5" id="results">
-      </ul>
+      <div data-controller="movies">
+        <form id="search-movies" class="form-inline d-flex justify-content-center m-5">
+          <input 
+            id="keyword" 
+            type="text" 
+            class="form-control" 
+            placeholder="Find movies"
+            data-movies-target="input"
+          >
+          <input 
+            id="submit" 
+            type="submit" 
+            class="btn btn-primary form-control" 
+            value="Search"
+            data-action="click->movies#handleSearchClick"
+          >
+        </form>
 
-      <button class="btn btn-primary btn-lg">
-        Click me!
-      </button>
+        <ul 
+          class="list-inline mt-5" 
+          id="results"
+          data-controller="sortable"
+          data-movies-target="list"
+        >
+        </ul>
+      </div>
       
     </div>
 
